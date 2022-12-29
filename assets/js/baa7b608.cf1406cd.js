@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkarkreen_docs=self.webpackChunkarkreen_docs||[]).push([[4345],{9128:e=>{e.exports=JSON.parse('{"permalink":"/ArkDocs/blog/tags/hello","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

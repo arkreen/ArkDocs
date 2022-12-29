@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkarkreen_docs=self.webpackChunkarkreen_docs||[]).push([[2631],{6270:e=>{e.exports=JSON.parse('{"label":"facebook","permalink":"/ArkDocs/blog/tags/facebook","allTagsPath":"/ArkDocs/blog/tags","count":1}')}}]);
