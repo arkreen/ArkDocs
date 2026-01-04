@@ -1,0 +1,242 @@
+Perfect 👍
+Neeche **IMPROVED & ADVANCED PYTHON RAG DOCUMENT** de raha hoon jisme:
+
+✅ Python-based RAG
+✅ Vector DB
+✅ **Fallback Web Search (ONLY Arkreen Docs)**
+✅ No hallucination
+✅ Production-ready logic
+
+Tum ye **direct developer ko de sakte ho**.
+
+---
+
+# 🚀 Arkreen Documentation RAG Chatbot (Python)
+
+## 🎯 Objective
+
+Build a **Python-based RAG chatbot** that:
+
+1. Extracts & stores Arkreen documentation into a vector DB
+2. Answers user queries using RAG
+3. **If answer is NOT found in vector DB**, then:
+
+   * Triggers a **controlled web search**
+   * Searches ONLY within `https://docs.arkreen.com/`
+   * Extracts fresh data
+   * Updates vector DB
+   * Answers user with citation
+
+---
+
+## 🧠 SYSTEM PROMPT (MASTER)
+
+```
+You are an AI documentation assistant specialized in Arkreen.
+
+Your responsibilities:
+- Answer questions strictly using Arkreen official documentation
+- First use vector database retrieval (RAG)
+- If no relevant data is found:
+    - Perform a live documentation search restricted to https://docs.arkreen.com/
+    - Extract only relevant sections
+    - Answer based on extracted content
+    - Clearly cite the source
+- Never hallucinate or guess
+- Never use external knowledge outside Arkreen docs
+```
+
+---
+
+## 🧱 Architecture Flow
+
+```
+User Query
+   ↓
+Embedding
+   ↓
+Vector DB Search
+   ↓
+Is relevant data found?
+   ├─ YES → Answer using RAG
+   └─ NO  → Web Search (docs.arkreen.com only)
+             ↓
+          Extract → Chunk → Embed → Store
+             ↓
+          Answer with citation
+```
+
+---
+
+## 🐍 Python Tech Stack
+
+```
+- Python 3.10+
+- LangChain or LlamaIndex
+- OpenAI / SentenceTransformer Embeddings
+- Vector DB: FAISS / Chroma / Pinecone
+- Web Search: Tavily / SerpAPI / Custom Scraper
+- LLM: GPT-4 / GPT-4o / GPT-4.1
+```
+
+---
+
+## 📥 Document Ingestion (Python)
+
+```
+- Crawl all pages from https://docs.arkreen.com/
+- Extract:
+  - Headings
+  - Paragraphs
+  - Tables
+  - FAQs
+- Remove:
+  - Navigation
+  - Footer
+  - Duplicate content
+```
+
+---
+
+## 🧩 Chunking Strategy
+
+```
+Chunk Size: 600 tokens
+Overlap: 120 tokens
+
+Each chunk metadata:
+{
+  "source": "Arkreen Docs",
+  "url": "<page-url>",
+  "section": "<section-title>",
+  "last_updated": "<timestamp>"
+}
+```
+
+---
+
+## 🧠 Vector DB Storage
+
+```
+Embed chunks → Store in vector DB
+Index name: arkreen_docs_index
+```
+
+---
+
+## 🔍 RAG Retrieval Logic (Python Pseudocode)
+
+```python
+docs = vector_db.similarity_search(query, k=4)
+
+if docs:
+    answer = llm.generate(context=docs, query=query)
+else:
+    docs = web_search_arkreen_docs(query)
+    processed_docs = process_and_store(docs)
+    answer = llm.generate(context=processed_docs, query=query)
+```
+
+---
+
+## 🌐 Controlled Web Search (IMPORTANT)
+
+```
+Search rules:
+- Search domain restricted to: docs.arkreen.com
+- No Google general search
+- No blogs, Medium, Twitter, etc.
+
+Search query format:
+site:docs.arkreen.com <user question>
+```
+
+---
+
+## 🌐 Web Search Prompt
+
+```
+Search Arkreen official documentation to answer the following question:
+
+Question: {{user_query}}
+
+Rules:
+- Extract only relevant sections
+- Ignore unrelated content
+- Return clean, factual information
+- Provide page URL
+```
+
+---
+
+## 💬 Answer Generation Prompt
+
+```
+Answer the question using ONLY the context below.
+
+<context>
+{{retrieved_context}}
+</context>
+
+Guidelines:
+- Use bullet points where applicable
+- Mention tokens correctly ($AKRE)
+- Be concise and accurate
+- Add citation at the end (Section + URL)
+
+If information is missing:
+Say: "This information is not available in the Arkreen documentation."
+```
+
+---
+
+## ❌ Safety & Hallucination Control
+
+```
+- Confidence threshold: 0.75
+- If similarity score < threshold → trigger web search
+- If still no data → return "Not available"
+```
+
+---
+
+## ✅ Example Queries
+
+* Explain Arkreen staking rewards
+* What is the AKRE token utility?
+* How does Arkreen carbon offset work?
+* What is GreenBTC?
+* Is there any lock-in period mentioned?
+
+---
+
+## 🧪 Optional Enhancements
+
+```
+- Auto re-index docs weekly
+- Source citation toggle
+- Chat history (last 5 queries)
+- Admin dashboard for vector stats
+```
+
+---
+
+## 🏁 Final Output Behavior
+
+```
+✔ Accurate
+✔ Cited
+✔ Documentation-backed
+✔ No hallucination
+✔ Always honest
+```
+
+---
+
+Agar chaho to main next:
+
+* ✅ **Complete Python LangChain code**
+* ✅ **FAISS + Google Gen AI implementation**
+* ✅ **FastAPI backend**
+
+bol do kya chahiye 🔥
